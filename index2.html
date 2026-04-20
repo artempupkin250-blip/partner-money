@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Open Graph (Превью для Telegram, VK и т.д.) -->
+    <meta property="og:title" content="Partner Money | Заработок на банковских продуктах">
+    <meta property="og:description" content="Оформляй бесплатные дебетовые и кредитные карты, и получай реальные деньги за каждое оформление!">
+    <meta property="og:image" content="https://dummyimage.com/1200x630/0f111a/00ff88&text=Partner+Money">
+    <meta property="og:type" content="website">
+    
+    <!-- Фавикон (иконка вкладки) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💸</text></svg>">
+    
+    <title>Partner Money | Заработок на банковских продуктах</title>
+    
+    <style>
+        /* Основные переменные */
+        :root {
+            --bg-color: #0f111a;
+            --card-bg: #1a1d29;
+            --text-color: #ffffff;
+            --text-muted: #94a3b8;
+            --accent-color: #00ff88;
+            --accent-hover: #00cc6a;
+        }
+        
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Градиентное свечение на фоне (Web3 стиль) */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                radial-gradient(circle at 15% 50%, rgba(0, 255, 136, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 85% 30%, rgba(138, 43, 226, 0.04) 0%, transparent 40%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Навигация */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5vw;
+            background-color: rgba(15, 17, 26, 0.85);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(12px);
+            z-index: 100;
+        }
+
+        .logo { font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+        .logo span { color: var(--accent-color); }
+
+        /* Кнопки */
+        .btn {
+            background-color: var(--accent-color);
+            color: #000000;
+            padding: 12px 28px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Главный экран */
+        .hero { text-align: center; padding: 100px 20px; max-width: 800px; margin: 0 auto; }
+        .hero h1 { font-size: 52px; margin-bottom: 20px; line-height: 1.1; }
+        .hero p { font-size: 18px; color: var(--text-muted); margin-bottom: 40px; }
+
+        /* Заголовки */
+        .section-title { text-align: center; margin: 80px 0 50px; font-size: 36px; }
+
+        /* Сетка карточек */
+        .grid {
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; 
+            padding: 0 5vw; max-width: 1200px; margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card-bg); padding: 40px 30px; border-radius: 16px; 
+            width: 320px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.05); 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .card:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+            border-color: rgba(0, 255, 136, 0.2);
+        }
+        
+        .card h3 { font-size: 22px; margin-bottom: 15px; }
+        .card p { color: var(--text-muted); margin-bottom: 20px; }
+        
+        .payout-tag {
+            display: inline-block; background: rgba(0, 255, 136, 0.1); 
+            color: var(--accent-color); padding: 8px 16px; border-radius: 20px; 
+            font-weight: bold; margin-bottom: 25px;
+        }
+
+        /* Банки */
+        .banks-grid {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; 
+            max-width: 900px; margin: 0 auto; padding: 0 20px;
+        }
+        .bank-item {
+            background: rgba(255, 255, 255, 0.03); padding: 15px 30px; border-radius: 12px; 
+            font-weight: 600; color: var(--text-muted); font-size: 18px;
+            filter: grayscale(100%); opacity: 0.7; transition: all 0.3s ease; cursor: default;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .bank-item:hover {
+            filter: grayscale(0%); opacity: 1; color: var(--text-color);
+            background: rgba(255, 255, 255, 0.08); transform: translateY(-3px);
+        }
+        .bank-item span { margin-right: 8px; }
+
+        /* Отзывы / Кейсы */
+        .review-card { text-align: left; padding: 30px; }
+        .review-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .avatar {
+            font-size: 30px; background: rgba(255, 255, 255, 0.05); width: 55px; height: 55px; 
+            display: flex; align-items: center; justify-content: center; border-radius: 50%;
+        }
+
+        /* Калькулятор */
+        .calculator {
+            background: var(--card-bg); max-width: 600px; margin: 0 auto 80px; 
+            padding: 50px; border-radius: 16px; text-align: center; 
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        input[type=range] { width: 100%; margin: 30px 0; accent-color: var(--accent-color); }
+        .result { font-size: 48px; font-weight: bold; color: var(--accent-color); margin-top: 20px; }
+
+        /* Плавная анимация при скролле */
+        .animate-on-scroll {
+            opacity: 0; transform: translateY(40px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+
+        /* Подвал */
+        footer {
+            text-align: center; padding: 40px 20px 60px; border-top: 1px solid rgba(255, 255, 255, 0.05); 
+            color: var(--text-muted); background: var(--card-bg);
+        }
+
+        /* Плавающая кнопка для мобилок */
+        .mobile-sticky-btn { display: none; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            .mobile-sticky-btn {
+                display: block; position: fixed; bottom: 20px; left: 5vw; right: 5vw; 
+                z-index: 999; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            }
+            .mobile-sticky-btn .btn { width: 100%; padding: 15px 0; font-size: 18px; box-sizing: border-box; }
+            header .btn { display: none; } /* Прячем кнопку в шапке на мобилках */
+            footer { padding-bottom: 100px; } /* Место под кнопку */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header>
+        <div class="logo">Partner<span>Money</span></div>
+        <a href="https://t.me/partner_moneybot" class="btn" target="_blank">Перейти в бота</a>
+    </header>
+
+    <!-- Главный экран -->
+    <div class="hero animate-on-scroll">
+        <h1>Твой легальный доход на банковских продуктах</h1>
+        <p>Зарабатывай реальные деньги за оформление бесплатных дебетовых карт, кредиток и регистрацию бизнеса. Мы делимся комиссией от банков с тобой!</p>
+        <a href="https://t.me/partner_moneybot" class="btn" style="padding: 18px 40px; font-size: 18px;" target="_blank">Начать зарабатывать</a>
+    </div>
+
+    <!-- Инструкция -->
+    <h2 class="section-title animate-on-scroll">Как это работает?</h2>
+    <div class="grid animate-on-scroll">
+        <div class="card">
+            <h3 style="color: var(--accent-color);">01. Запуск бота</h3>
+            <p>Переходишь в нашего Telegram-бота и выбираешь нужный продукт из каталога.</p>
+        </div>
+        <div class="card">
+            <h3 style="color: var(--accent-color);">02. Оформление</h3>
+            <p>Заполняешь официальную заявку на сайте банка по ссылке из бота и забираешь карту.</p>
+        </div>
+        <div class="card">
+            <h3 style="color: var(--accent-color);">03. Выплата</h3>
+            <p>Банк начисляет нам комиссию за клиента, а мы переводим твою долю на баланс в боте!</p>
+        </div>
+    </div>
+
+    <!-- Банки -->
+    <h2 class="section-title animate-on-scroll">С какими банками мы работаем</h2>
+    <div class="banks-grid animate-on-scroll">
+        <div class="bank-item"><span style="color:#ef3124">●</span> Альфа-Банк</div>
+        <div class="bank-item"><span style="color:#ffdd2d">●</span> Т-Банк</div>
+        <div class="bank-item"><span style="color:#21a038">●</span> Сбер</div>
+        <div class="bank-item"><span style="color:#0a2896">●</span> ВТБ</div>
+        <div class="bank-item"><span style="color:#007fe3">●</span> Газпромбанк</div>
+        <div class="bank-item"><span style="color:#ff0000">●</span> МТС Банк</div>
+    </div>
+
+    <!-- Витрина продуктов -->
+    <h2 class="section-title animate-on-scroll">Витрина продуктов</h2>
+    <div class="grid animate-on-scroll">
+        <div class="card">
+            <h3>💳 Дебетовые карты</h3>
+            <p>Бесплатное обслуживание, кэшбэк рублями и бонусы от популярных банков.</p>
+            <div class="payout-tag">Выплата: до 1 500 ₽</div>
+            <a href="https://t.me/partner_moneybot" class="btn" target="_blank">Оформить в боте</a>
+        </div>
+        <div class="card">
+            <h3>🏦 Кредитные карты</h3>
+            <p>Длинный беспроцентный период и возможность снятия наличных без комиссии.</p>
+            <div class="payout-tag">Выплата: до 3 000 ₽</div>
+            <a href="https://t.me/partner_moneybot" class="btn" target="_blank">Оформить в боте</a>
+        </div>
+        <div class="card">
+            <h3>💼 Регистрация бизнеса</h3>
+            <p>Открытие ИП или ООО полностью онлайн, без очередей и походов в налоговую.</p>
+            <div class="payout-tag">Выплата: до 5 000 ₽</div>
+            <a href="https://t.me/partner_moneybot" class="btn" target="_blank">Оформить в боте</a>
+        </div>
+    </div>
+
+    <!-- Живые кейсы -->
+    <h2 class="section-title animate-on-scroll">Живые кейсы</h2>
+    <div class="grid animate-on-scroll">
+        <div class="card review-card">
+            <div class="review-header">
+                <div class="avatar">👨‍🎓</div>
+                <div><b>Алексей, 19 лет</b><br><span style="font-size:13px;color:var(--text-muted)">Студент</span></div>
+            </div>
+            <p>"Оформил дебетовку Т-Банка себе и порекомендовал кредитку другу. В боте начислили вознаграждение, вывел на Сбер за минуту. Спасибо!"</p>
+            <div class="payout-tag" style="margin-bottom:0;">Заработал: 4 500 ₽</div>
+        </div>
+        <div class="card review-card">
+            <div class="review-header">
+                <div class="avatar">👩‍💼</div>
+                <div><b>Елена, 32 года</b><br><span style="font-size:13px;color:var(--text-muted)">В декрете</span></div>
+            </div>
+            <p>"Искала подработку на пару часов в неделю. Просто кидаю ссылки знакомым, которым нужны карты. За месяц набегает отличная сумма."</p>
+            <div class="payout-tag" style="margin-bottom:0;">Заработала: 12 000 ₽</div>
+        </div>
+        <div class="card review-card">
+            <div class="review-header">
+                <div class="avatar">👨‍💻</div>
+                <div><b>Денис, 25 лет</b><br><span style="font-size:13px;color:var(--text-muted)">Фрилансер</span></div>
+            </div>
+            <p>"Нужно было открыть ИП для работы. Сделал это через Partner Money, мало того что бесплатно, так еще и бонус сверху накинули."</p>
+            <div class="payout-tag" style="margin-bottom:0;">Заработал: 5 000 ₽</div>
+        </div>
+    </div>
+
+    <!-- Калькулятор -->
+    <h2 class="section-title animate-on-scroll">Калькулятор дохода</h2>
+    <div class="calculator animate-on-scroll">
+        <p style="font-size: 20px; color: var(--text-color);">Сколько продуктов ты или твои друзья оформите в месяц?</p>
+        <div style="font-size: 24px; font-weight: bold; margin-top: 10px;" id="rangeVal">5 оформлений</div>
+        <input type="range" id="slider" min="1" max="30" value="5" oninput="calculateIncome()">
+        <p style="color: var(--text-muted);">Твой примерный заработок составит:</p>
+        <div class="result"><span id="income">10 000</span> ₽</div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-top: 20px;">
+            *Расчет примерный. Взята средняя выплата в размере 2 000 ₽ за одно успешное оформление.
+        </p>
+    </div>
+
+    <!-- Подвал -->
+    <footer>
+        <p>© 2026 Partner Money. Все права защищены.</p>
+        <p>Техническая поддержка и выплаты осуществляются через нашего официального Telegram-бота.</p>
+    </footer>
+
+    <!-- Плавающая кнопка для телефонов -->
+    <div class="mobile-sticky-btn">
+        <a href="https://t.me/partner_moneybot" class="btn" target="_blank">💰 Начать зарабатывать в боте</a>
+    </div>
+
+    <!-- Скрипты (Калькулятор и Анимация) -->
+    <script>
+        // Скрипт калькулятора
+        function calculateIncome() {
+            let count = document.getElementById("slider").value;
+            let averagePayout = 2000; 
+            
+            let word = "оформлений";
+            let lastDigit = count % 10;
+            let lastTwoDigits = count % 100;
+            
+            if (lastDigit === 1 && lastTwoDigits !== 11) {
+                word = "оформление";
+            } else if ([2, 3, 4].includes(lastDigit) && ![12, 13, 14].includes(lastTwoDigits)) {
+                word = "оформления";
+            }
+
+            document.getElementById("rangeVal").innerText = count + " " + word;
+            document.getElementById("income").innerText = (count * averagePayout).toLocaleString('ru-RU');
+        }
+
+        // Скрипт плавной анимации при скролле (Intersection Observer)
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.1 // Срабатывает, когда 10% элемента появляется на экране
+            });
+
+            const hiddenElements = document.querySelectorAll('.animate-on-scroll');
+            hiddenElements.forEach((el) => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
